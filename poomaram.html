@@ -1,0 +1,514 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Poomaram – Sell Plants Online</title>
+  <!-- Font Awesome for icons (free, open source) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+    }
+    body {
+      background: #f4f9ef;
+      color: #1e3a1e;
+    }
+    /* header */
+    .top-banner {
+      background: #2e6b2f;
+      color: white;
+      text-align: center;
+      padding: 8px;
+      font-size: 13px;
+    }
+    .main-header {
+      background: white;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .logo h1 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #1a5f1a, #4fa83d);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .logo i {
+      color: #3b8c2e;
+    }
+    .search-wrap {
+      flex: 1;
+      max-width: 480px;
+      display: flex;
+      border: 1px solid #cce3c2;
+      border-radius: 40px;
+      overflow: hidden;
+      background: white;
+    }
+    .search-wrap input {
+      flex: 1;
+      padding: 10px 16px;
+      border: none;
+      outline: none;
+    }
+    .search-wrap button {
+      background: #f5b042;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+    }
+    .header-icons {
+      display: flex;
+      gap: 1.2rem;
+    }
+    .icon-item {
+      text-align: center;
+      font-size: 12px;
+      color: #2c6e2c;
+    }
+    .icon-item i {
+      font-size: 22px;
+      display: block;
+    }
+    /* category row */
+    .category-bar {
+      background: #fef8e7;
+      padding: 0.6rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      border-bottom: 1px solid #dde9d2;
+      font-weight: 500;
+    }
+    .category-bar a {
+      text-decoration: none;
+      color: #2d5728;
+      font-size: 0.85rem;
+    }
+    /* main */
+    .container {
+      max-width: 1300px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+    }
+    .hero-stats {
+      background: #eaf5e2;
+      border-radius: 28px;
+      padding: 1.2rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .badge-count {
+      background: #2e6b2f;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      border-left: 6px solid #f5b042;
+      padding-left: 16px;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .plant-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      transition: 0.2s;
+      border: 1px solid #deecd2;
+    }
+    .plant-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 28px -12px rgba(0,0,0,0.15);
+    }
+    .card-img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: #eaf3e3;
+      display: block;
+    }
+    .card-content {
+      padding: 1rem 1.2rem;
+    }
+    .plant-name {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #1b4c1b;
+    }
+    .price {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #e67e22;
+      margin: 6px 0;
+    }
+    .desc {
+      font-size: 0.85rem;
+      color: #446b3a;
+      line-height: 1.4;
+      margin: 8px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-footer {
+      padding: 0.6rem 1.2rem 1.2rem;
+      border-top: 1px solid #eff6e9;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .delete-btn {
+      background: #fff2ed;
+      border: none;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #c94f2b;
+      cursor: pointer;
+    }
+    /* upload panel */
+    .upload-panel {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem 2rem;
+      margin: 1rem 0;
+      border: 1px solid #d0e6c2;
+    }
+    .upload-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: #2e6b2f;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    label {
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    input, textarea {
+      padding: 10px 14px;
+      border: 1.5px solid #cde2c0;
+      border-radius: 28px;
+      font-family: inherit;
+      background: #fefef9;
+    }
+    .image-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 5px;
+    }
+    .preview-thumb {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 20px;
+      background: #e1f0d6;
+    }
+    .file-label {
+      background: #eef5e9;
+      padding: 8px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .btn-primary {
+      background: #f5b042;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      background: #fefaf0;
+      border-radius: 28px;
+      color: #719b60;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      font-size: 0.75rem;
+      color: #6f9762;
+      border-top: 1px solid #dcebd1;
+    }
+    @media (max-width: 680px) {
+      .main-header { flex-direction: column; align-items: stretch; }
+      .search-wrap { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="top-banner">
+  🌱 Free shipping on orders over ₹999 | 🌸 Fresh from our nursery
+</div>
+<div class="main-header">
+  <div class="logo">
+    <h1><i class="fas fa-leaf"></i> poomaram</h1>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search plants...">
+    <button id="searchBtn"><i class="fas fa-search"></i></button>
+  </div>
+  <div class="header-icons">
+    <div class="icon-item"><i class="fas fa-user"></i><span>Account</span></div>
+    <div class="icon-item"><i class="fas fa-shopping-cart"></i><span>Cart</span></div>
+  </div>
+</div>
+<div class="category-bar">
+  <a href="#">🌿 All Plants</a>
+  <a href="#">🌸 Flowering</a>
+  <a href="#">🍃 Indoor</a>
+  <a href="#">🌵 Succulents</a>
+  <a href="#">🍎 Fruit Trees</a>
+  <a href="#">🌻 Seasonal</a>
+</div>
+<div class="container">
+  <div class="hero-stats">
+    <div><strong>🌻 Welcome to Poomaram</strong><br>Your green marketplace – sell & buy plants</div>
+    <div class="badge-count" id="productCount">0 plants</div>
+  </div>
+  <div class="section-title"><i class="fas fa-seedling"></i> Our collection</div>
+  <div id="productsGrid" class="products-grid"></div>
+
+  <!-- seller upload panel -->
+  <div class="upload-panel">
+    <div class="upload-title"><i class="fas fa-cloud-upload-alt"></i> Add your own product</div>
+    <form id="uploadForm">
+      <div class="form-row">
+        <div class="form-group"><label>Plant name *</label><input type="text" id="plantName" required></div>
+        <div class="form-group"><label>Price (₹) *</label><input type="number" id="plantPrice" step="0.01" required></div>
+      </div>
+      <div class="form-group"><label>Description (care, details) *</label><textarea id="plantDesc" rows="2" required></textarea></div>
+      <div class="form-group"><label>Plant image (optional)</label>
+        <div class="image-area">
+          <img id="imgPreview" class="preview-thumb" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e2f0da'/%3E%3Ctext x='50' y='72' font-size='46' text-anchor='middle' fill='%233c7a3c'%3E🌿%3C/text%3E%3C/svg%3E">
+          <label class="file-label" for="imageUpload"><i class="fas fa-camera"></i> Choose image</label>
+          <input type="file" id="imageUpload" accept="image/jpeg, image/png" style="display:none">
+        </div>
+      </div>
+      <button type="submit" class="btn-primary"><i class="fas fa-plus-circle"></i> Publish to store</button>
+    </form>
+  </div>
+  <footer>🌿 Poomaram -- original plant store. Upload your products, set prices, manage easily.</footer>
+</div>
+
+<script>
+  // ---- ORIGINAL, COPYRIGHT-SAFE PLANT STORE ----
+  const STORAGE_KEY = 'poomaram_original_plants';
+  let plants = [];
+
+  // default products (generic, common plant names – no copyright)
+  const DEFAULT_PLANTS = [
+    { id: 1001, name: "Monstera Deliciosa", price: 1199, description: "Large split leaves, tropical vibe, easy care.", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23daf0d0'/%3E%3Ctext x='100' y='85' font-size='46' text-anchor='middle' fill='%233d7a3d'%3E🌿%3C/text%3E%3C/svg%3E" },
+    { id: 1002, name: "Snake Plant", price: 649, description: "Air purifier, low light, drought tolerant.", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23def0d4'/%3E%3Ctext x='100' y='85' font-size='46' text-anchor='middle' fill='%233d7a3d'%3E🐍%3C/text%3E%3C/svg%3E" },
+    { id: 1003, name: "Peace Lily", price: 899, description: "White blooms, shade loving, elegant.", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23ecf7e4'/%3E%3Ctext x='100' y='85' font-size='46' text-anchor='middle' fill='%233d7a3d'%3E🌸%3C/text%3E%3C/svg%3E" },
+    { id: 1004, name: "Fiddle Leaf Fig", price: 1999, description: "Large glossy leaves, statement plant.", image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23e9f3e1'/%3E%3Ctext x='100' y='85' font-size='46' text-anchor='middle' fill='%233d7a3d'%3E🎻%3C/text%3E%3C/svg%3E" }
+  ];
+
+  function loadData() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        plants = JSON.parse(stored);
+        plants = plants.map(p => ({ ...p, image: p.image || getFallbackSvg(p.name) }));
+      } catch(e) { plants = [...DEFAULT_PLANTS]; }
+    } else {
+      plants = [...DEFAULT_PLANTS];
+    }
+    if (!plants.length) plants = [...DEFAULT_PLANTS];
+    saveToLocal();
+    updateCounter();
+  }
+
+  function getFallbackSvg(name) {
+    const letter = name ? name.charAt(0).toUpperCase() : '🌿';
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23ebf5e4'/%3E%3Ctext x='100' y='85' font-size='52' text-anchor='middle' fill='%233d7942'%3E${encodeURIComponent(letter)}%3C/text%3E%3C/svg%3E`;
+  }
+
+  function saveToLocal() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(plants));
+    updateCounter();
+  }
+
+  function updateCounter() {
+    const span = document.getElementById('productCount');
+    if (span) span.innerText = `${plants.length} plant${plants.length !== 1 ? 's' : ''}`;
+  }
+
+  function renderProducts(filter = "") {
+    const container = document.getElementById('productsGrid');
+    if (!container) return;
+    let filtered = plants;
+    if (filter.trim()) {
+      const lower = filter.toLowerCase();
+      filtered = plants.filter(p => p.name.toLowerCase().includes(lower) || p.description.toLowerCase().includes(lower));
+    }
+    if (filtered.length === 0) {
+      container.innerHTML = `<div class="empty-state"><i class="fas fa-seedling"></i> No plants found. Add your own above!</div>`;
+      return;
+    }
+    let html = '';
+    for (let p of filtered) {
+      html += `
+        <div class="plant-card" data-id="${p.id}">
+          <img class="card-img" src="${p.image}" alt="${escapeHtml(p.name)}" onerror="this.src='${getFallbackSvg(p.name)}'">
+          <div class="card-content">
+            <div class="plant-name">${escapeHtml(p.name)}</div>
+            <div class="price">₹ ${Number(p.price).toLocaleString()}</div>
+            <div class="desc">${escapeHtml(p.description)}</div>
+          </div>
+          <div class="card-footer">
+            <button class="delete-btn" data-id="${p.id}"><i class="fas fa-trash-alt"></i> Remove</button>
+          </div>
+        </div>
+      `;
+    }
+    container.innerHTML = html;
+  }
+
+  function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+
+  // image upload handling
+  let selectedImageData = null;
+  function setupImage() {
+    const fileInp = document.getElementById('imageUpload');
+    const preview = document.getElementById('imgPreview');
+    fileInp.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          selectedImageData = ev.target.result;
+          preview.src = selectedImageData;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        selectedImageData = null;
+        preview.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e2f0da'/%3E%3Ctext x='50' y='72' font-size='46' text-anchor='middle' fill='%233c7a3c'%3E🌿%3C/text%3E%3C/svg%3E";
+      }
+    });
+  }
+
+  function addProduct(name, price, desc, imageBase64) {
+    if (!name.trim()) { alert("Plant name required"); return false; }
+    const priceNum = parseFloat(price);
+    if (isNaN(priceNum) || priceNum <= 0) { alert("Valid price required"); return false; }
+    if (!desc.trim()) { alert("Description required"); return false; }
+    const newPlant = {
+      id: Date.now(),
+      name: name.trim(),
+      price: priceNum,
+      description: desc.trim(),
+      image: imageBase64 || getFallbackSvg(name)
+    };
+    plants.push(newPlant);
+    saveToLocal();
+    const searchVal = document.getElementById('searchInput')?.value || "";
+    renderProducts(searchVal);
+    return true;
+  }
+
+  function deleteProduct(id) {
+    if (confirm("Remove this plant from your store?")) {
+      plants = plants.filter(p => p.id !== id);
+      saveToLocal();
+      const searchVal = document.getElementById('searchInput')?.value || "";
+      renderProducts(searchVal);
+    }
+  }
+
+  // event listeners
+  function initForm() {
+    const form = document.getElementById('uploadForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('plantName').value;
+      const price = document.getElementById('plantPrice').value;
+      const desc = document.getElementById('plantDesc').value;
+      const success = addProduct(name, price, desc, selectedImageData);
+      if (success) {
+        form.reset();
+        selectedImageData = null;
+        document.getElementById('imgPreview').src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e2f0da'/%3E%3Ctext x='50' y='72' font-size='46' text-anchor='middle' fill='%233c7a3c'%3E🌿%3C/text%3E%3C/svg%3E";
+        document.getElementById('imageUpload').value = '';
+        const btn = document.querySelector('.btn-primary');
+        const old = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Added!';
+        setTimeout(() => { btn.innerHTML = old; }, 1500);
+      }
+    });
+  }
+
+  function deleteDelegation() {
+    const grid = document.getElementById('productsGrid');
+    grid.addEventListener('click', (e) => {
+      const btn = e.target.closest('.delete-btn');
+      if (btn && btn.dataset.id) {
+        deleteProduct(parseInt(btn.dataset.id));
+      }
+    });
+  }
+
+  function searchHandler() {
+    const input = document.getElementById('searchInput');
+    const btn = document.getElementById('searchBtn');
+    const doSearch = () => renderProducts(input.value);
+    btn.addEventListener('click', doSearch);
+    input.addEventListener('keyup', (e) => { if (e.key === 'Enter') doSearch(); });
+  }
+
+  function init() {
+    loadData();
+    renderProducts("");
+    setupImage();
+    initForm();
+    deleteDelegation();
+    searchHandler();
+  }
+  init();
+</script>
+</body>
+</html>
